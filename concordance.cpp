@@ -31,7 +31,7 @@ void Concordance::parse()
         {
         bool word_found =false;
 
-        for(int i = 0; i <= m_words.size()-1; i++)
+        for(int i = 0; i < m_words.size(); i++)
         {
                 if(m_words[i].get_word() == word)
                 { 
@@ -43,10 +43,10 @@ void Concordance::parse()
                 }
          }
 
-      if(!word_found) m_words.push_back(Word(word));
+      //if(!word_found) m_words.push_back(Word(word));
       if(!word_found) 
             {
-                temp word  = Word(word);
+                Word temp  = Word(word);
                 temp.add_line(m_currentline);
                 m_words.push_back(temp);
             }
@@ -84,7 +84,7 @@ void Concordance::eat_whitespace(std::ifstream& input)
 std::string Concordance::next_word(std::ifstream& input)
 {
     std::string word;
-    for(;;)
+     for(;;)
     {
         char c;
         input.get(c);
@@ -92,7 +92,7 @@ std::string Concordance::next_word(std::ifstream& input)
         if(c == '\n')
         {
           m_currentline++;
-        {
+        }
         
         if(input.eof())
             break;
@@ -112,11 +112,11 @@ std::string Concordance::next_word(std::ifstream& input)
 
 }
 
-void Concordance::print()
+void Concordance::print() 
 {
     //print out the concordance
     //std::cout << m_words.size() << std::endl;
-    for(int index = 0;index<m_words.size()-1;index++)
+    for(int index = 0;index<m_words.size();index++)
     {
         m_words[index].print();
     }
