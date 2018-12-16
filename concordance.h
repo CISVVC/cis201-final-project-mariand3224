@@ -29,6 +29,7 @@ private:
      std::vector<Word> m_words;
      std::vector<std::string> string_of_words;
      std::string m_filename;
+     int m_currentline;
      int total_in_txt;
 };
 

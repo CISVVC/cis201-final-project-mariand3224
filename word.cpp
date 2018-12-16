@@ -36,10 +36,12 @@ std::string Word::get_word()
 void Word::print() const 
 {
     std::cout << m_word << ", "<< m_count << ", ";
+    std::cout << m_word << ", "<< m_count;
     //<< " : " << m_count << " : " << m _line[0];
     for(int i =0; i < m_line.size(); i++)
     {
         std::cout << ", "<< m_count << ", " << m_line[i];
+        std::cout << ", "<< m_line[i];
     }
     std::cout << std::endl;
 

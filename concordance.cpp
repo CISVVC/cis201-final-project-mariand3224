@@ -11,6 +11,7 @@ DOC:
 Concordance::Concordance(std::string filename)
 {
     m_filename = filename;
+    m_currentline = 1;
     total_in_txt = 1;
 }
 
@@ -31,25 +32,33 @@ void Concordance::parse()
         bool word_found =false;
 
         for(int i = 0; i <= m_words.size()-1; i++)
-            { 
+        {
                 if(m_words[i].get_word() == word)
                 { 
                      word_found =true;
                 
                     total_in_txt++;
                     m_words[i].add_count(total_in_txt);
+                    m_words[i].add_line(m_currentline);
                 }
-            } 
-            if(word_found) m_words.push_back(Word(word));
+         }
+
+      if(!word_found) m_words.push_back(Word(word));
+      if(!word_found) 
+            {
+                temp word  = Word(word);
+                temp.add_line(m_currentline);
+                m_words.push_back(temp);
+            }
             
         
-        }
+
         //implement the rest of this function
         //this is just to see the words as they are printed out
-        //the word may have some punctuation attached to it, this
-        //will be okay for this example
-    }
+   }     //the word may have some punctuation attached to it, this
+  }      //will be okay for this example
 }
+    
 
 bool Concordance::is_whitespace(char c)
 {
@@ -80,13 +89,19 @@ std::string Concordance::next_word(std::ifstream& input)
         char c;
         input.get(c);
         
+        if(c == '\n')
+        {
+          m_currentline++;
+        {
+        
         if(input.eof())
             break;
         if(!is_whitespace(c))
         {   
             word += tolower(c);
         }
-        else if (is_whitespace(c))
+        else if(is_whitespace(c))
+
         {
             eat_whitespace(input);
             break;
@@ -118,5 +133,5 @@ std::string Concordance::Remove_Punctuation(std::string word)
         }
     } 
     return word;
-
-}
+} 
+ 
